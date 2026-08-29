@@ -15,6 +15,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const faqRoutes = require('./routes/faqRoutes');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security and utility middlewares
 app.use(

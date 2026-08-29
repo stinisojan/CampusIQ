@@ -9,13 +9,16 @@ const generateEmbedding = async (text) => {
     try {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
-      // Try text-embedding-004 first, or fall back to embedding-001
-      const modelName = config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004';
+      
+      // Ensure model name has full resource prefix or falls back safely
+      let rawModel = config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004';
+      const modelName = rawModel.startsWith('models/') ? rawModel : `models/${rawModel}`;
+      
       const model = genAI.getGenerativeModel({ model: modelName });
       const result = await model.embedContent(cleanText);
       return result.embedding.values;
     } catch (err) {
-      console.warn(`[EmbeddingService] Gemini embedding error with model (${config.GEMINI_EMBEDDING_MODEL}): ${err.message}. Using local fallback vector.`);
+      console.warn(`[EmbeddingService] Gemini embedding error with model (${config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004'}): ${err.message}. Using local fallback vector.`);
     }
   }
 
