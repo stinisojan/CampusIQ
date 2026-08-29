@@ -1,0 +1,50 @@
+================================================================================
+CAMPUSIQ UNIVERSITY — DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING (CSE)
+Academic Handbook, Course Catalog & Grading Policy (2026-2027)
+Document ID: CSE-ACAD-2026-V3
+================================================================================
+
+1. B.TECH COMPUTER SCIENCE DEGREE REQUIREMENTS
+Total Credits Required for Graduation: 160 Credits
+- Core Engineering & Mathematics: 36 Credits
+- Computer Science Professional Core: 64 Credits
+- Departmental & Open Electives: 32 Credits
+- Capstone Project / Industry Internship: 16 Credits
+- Humanities & Social Sciences: 12 Credits
+
+2. CORE COURSE MATRIX (YEAR 1 TO YEAR 3)
+- Semester 1 & 2: Introduction to Programming with Python & C++, Discrete Mathematics, Digital Logic Design, Calculus I & II, Engineering Physics.
+- Semester 3: Data Structures & Algorithms (CS201), Computer Architecture (CS202), Object-Oriented Software Design (CS203), Probability & Statistics (MA201).
+- Semester 4: Operating Systems (CS204), Database Management Systems (CS205), Theory of Computation (CS206), Computer Networks (CS207).
+- Semester 5: Design and Analysis of Algorithms (CS301), Artificial Intelligence & Machine Learning (CS302), Compiler Design (CS303), Cloud Computing Architecture (CS304).
+- Semester 6: Distributed Systems (CS305), Cryptography & Information Security (CS306), Elective I, Elective II.
+
+3. SPECIALIZATION TRACKS
+Students may declare a track starting in Semester 5:
+- Track A: Artificial Intelligence & Autonomous Systems (Deep Learning, NLP, Computer Vision, LLMs & Generative AI).
+- Track B: Cyber Security & Cloud Infrastructure (Network Defense, Blockchain, Cloud Security, Ethical Hacking).
+- Track C: Full-Stack Web & Distributed Platforms (Microservices, DevOps, Next.js / GraphQL, Scalable Databases).
+
+4. ATTENDANCE & GRADING SCHEME
+Attendance Rule:
+- Minimum mandatory attendance is 75% in each registered course to be eligible to appear in the End-Semester Examination.
+- Medical condonation allows up to 10% relaxation upon verified hospital records submitted within 7 days of absence.
+
+Grading Scale (10-Point CGPA Scale):
+- Letter Grade 'O' (Outstanding): 90% - 100% | Grade Points: 10.0
+- Letter Grade 'A+' (Excellent): 80% - 89% | Grade Points: 9.0
+- Letter Grade 'A' (Very Good): 70% - 79% | Grade Points: 8.0
+- Letter Grade 'B+' (Good): 60% - 69% | Grade Points: 7.0
+- Letter Grade 'B' (Above Average): 55% - 59% | Grade Points: 6.0
+- Letter Grade 'C' (Average / Pass): 50% - 54% | Grade Points: 5.0
+- Letter Grade 'F' (Fail): Below 50% | Grade Points: 0.0 (Must reappear in supplementary exam)
+
+5. PLACEMENTS & INDUSTRY INTERNSHIPS
+- Mandatory Summer Internship: 8-week duration between Semester 6 and Semester 7.
+- Minimum CGPA required for Tier-1 Company Campus Recruitment drives: 7.50 CGPA with no active backlogs.
+- Top hiring partners: Google, Microsoft, Amazon, NVIDIA, Apple, Adobe, Goldman Sachs.
+
+6. DEPARTMENT CONTACTS
+- Head of Department (CSE): hod.cse@campusiq.edu | Room 304, Turing Computing Wing
+- Academic Advisor: cse.advisor@campusiq.edu | Office Hours: Tue/Thu 2:00 PM – 5:00 PM
+================================================================================

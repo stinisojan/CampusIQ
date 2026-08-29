@@ -1,0 +1,72 @@
+const config = require('../config/env');
+
+const generateEmbedding = async (text) => {
+  const cleanText = text.replace(/\n/g, ' ').trim();
+  if (!cleanText) return new Array(768).fill(0);
+
+  // 1. Google Gemini Embeddings
+  if (config.EMBEDDING_PROVIDER === 'gemini' && config.GEMINI_API_KEY) {
+    try {
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
+      // Try text-embedding-004 first, or fall back to embedding-001
+      const modelName = config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004';
+      const model = genAI.getGenerativeModel({ model: modelName });
+      const result = await model.embedContent(cleanText);
+      return result.embedding.values;
+    } catch (err) {
+      console.warn(`[EmbeddingService] Gemini embedding error with model (${config.GEMINI_EMBEDDING_MODEL}): ${err.message}. Using local fallback vector.`);
+    }
+  }
+
+  // 2. Local Fallback Vector Generator (Prevents server crashes)
+  return generateDeterministicEmbedding(cleanText, 768);
+};
+
+/**
+ * Deterministic bag-of-words pseudo-embedding vector
+ */
+function generateDeterministicEmbedding(text, dimension = 768) {
+  const vector = new Array(dimension).fill(0);
+  const words = text.toLowerCase().split(/\W+/).filter(Boolean);
+  
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    let hash = 0;
+    for (let j = 0; j < word.length; j++) {
+      hash = (hash << 5) - hash + word.charCodeAt(j);
+      hash |= 0;
+    }
+    const index = Math.abs(hash) % dimension;
+    vector[index] += 1 / (i + 1);
+  }
+
+  let norm = 0;
+  for (let i = 0; i < dimension; i++) {
+    norm += vector[i] * vector[i];
+  }
+  norm = Math.sqrt(norm);
+  if (norm > 0) {
+    for (let i = 0; i < dimension; i++) {
+      vector[i] /= norm;
+    }
+  }
+  return vector;
+}
+
+const generateBatchEmbeddings = async (texts) => {
+  const results = [];
+  for (let i = 0; i < texts.length; i++) {
+    const emb = await generateEmbedding(texts[i]);
+    results.push(emb);
+    if (i < texts.length - 1 && config.GEMINI_API_KEY) {
+      await new Promise((resolve) => setTimeout(resolve, 80));
+    }
+  }
+  return results;
+};
+
+module.exports = {
+  generateEmbedding,
+  generateBatchEmbeddings,
+};
