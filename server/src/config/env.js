@@ -9,16 +9,16 @@ const config = {
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
   
   // AI & RAG Configuration
-  EMBEDDING_PROVIDER: process.env.EMBEDDING_PROVIDER || 'gemini', // 'gemini' | 'openai'
-  LLM_PROVIDER: process.env.LLM_PROVIDER || 'gemini',             // 'gemini' | 'openai'
+  EMBEDDING_PROVIDER: process.env.EMBEDDING_PROVIDER || 'gemini',
+  LLM_PROVIDER: process.env.LLM_PROVIDER || 'gemini',
   
   // Google API Key
-  GEMINI_API_KEY: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || 'AIzaSy_YOUR_COPIED_KEY_HERE',
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '',
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   
-  // LLM Models (Updated to stable production models)
+  // LLM Models (Standardized clean string names)
   GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
-  GEMINI_EMBEDDING_MODEL: process.env.GEMINI_EMBEDDING_MODEL || 'models/text-embedding-004',
+  GEMINI_EMBEDDING_MODEL: process.env.GEMINI_EMBEDDING_MODEL || 'text-embedding-004',
   OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4o-mini',
   OPENAI_EMBEDDING_MODEL: process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
   

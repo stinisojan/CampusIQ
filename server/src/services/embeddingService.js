@@ -10,8 +10,10 @@ const generateEmbedding = async (text) => {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
       
-      // Use clean model name (SDK prepends 'models/' automatically)
-      const modelName = 'gemini-embedding-001';
+      // Use config model name and format namespace safely
+      const rawModel = config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004';
+      const modelName = rawModel.startsWith('models/') ? rawModel : `models/${rawModel}`;
+      
       const model = genAI.getGenerativeModel({ model: modelName });
       
       const result = await model.embedContent(cleanText);
