@@ -32,7 +32,7 @@ ${candidateChunks.map((c, i) => `[Index ${i}] ${c.text.slice(0, 200)}...`).join(
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
       
       // Sanitize model string: strip any leading 'models/' prefix
-      const rawModel = config.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+      const rawModel = config.GEMINI_MODEL || 'gemini-3.6-flash';
       const cleanModel = rawModel.replace(/^models\//, '');
 
       const model = genAI.getGenerativeModel({ model: cleanModel });
