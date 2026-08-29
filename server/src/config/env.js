@@ -12,13 +12,13 @@ const config = {
   EMBEDDING_PROVIDER: process.env.EMBEDDING_PROVIDER || 'gemini', // 'gemini' | 'openai'
   LLM_PROVIDER: process.env.LLM_PROVIDER || 'gemini',             // 'gemini' | 'openai'
   
-  // 💡 PASTE YOUR COPIED GOOGLE API KEY DIRECTLY IN THE SECOND ARGUMENT BELOW IF NOT USING A .ENV FILE:
+  // Google API Key
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || 'AIzaSy_YOUR_COPIED_KEY_HERE',
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   
-  // LLM Models (Updated to active 2026 production model strings)
-  GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
-  GEMINI_EMBEDDING_MODEL: process.env.GEMINI_EMBEDDING_MODEL || 'gemini-embedding-001',
+  // LLM Models (Updated to stable production models)
+  GEMINI_MODEL: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
+  GEMINI_EMBEDDING_MODEL: process.env.GEMINI_EMBEDDING_MODEL || 'models/text-embedding-004',
   OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4o-mini',
   OPENAI_EMBEDDING_MODEL: process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
   
