@@ -30,7 +30,12 @@ ${candidateChunks.map((c, i) => `[Index ${i}] ${c.text.slice(0, 200)}...`).join(
     if (config.LLM_PROVIDER === 'gemini' && config.GEMINI_API_KEY) {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: config.GEMINI_MODEL || 'gemini-1.5-flash' });
+      
+      // Sanitize model string: strip any leading 'models/' prefix
+      const rawModel = config.GEMINI_MODEL || 'gemini-1.5-flash';
+      const cleanModel = rawModel.replace(/^models\//, '');
+
+      const model = genAI.getGenerativeModel({ model: cleanModel });
       const result = await model.generateContent(prompt);
       const cleanJson = result.response.text().replace(/```json|```/g, '').trim();
       const rankings = JSON.parse(cleanJson);

@@ -41,8 +41,13 @@ const generateAnswer = async (question, contextText, hasContext, onToken = null)
     try {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
+      
+      // Sanitize model string: strip any leading 'models/' prefix
+      const rawModel = config.GEMINI_MODEL || 'gemini-1.5-flash';
+      const cleanModel = rawModel.replace(/^models\//, '');
+
       const model = genAI.getGenerativeModel({
-        model: config.GEMINI_MODEL || 'gemini-1.5-flash',
+        model: cleanModel,
         systemInstruction: SYSTEM_PROMPT,
       });
 
@@ -94,22 +99,14 @@ const generateAnswer = async (question, contextText, hasContext, onToken = null)
   // 3. Fallback when no LLM API key provided
   console.warn('[AnswerAgent] No LLM API Key provided. Extracting clean excerpt for demo.');
 
-// Clean up raw source wrappers (--- [SOURCE DOCUMENT ... ---) from the raw context string
-const cleanExcerpt = contextText
-  .replace(/--- \[SOURCE DOCUMENT \d+:.*?\n/g, '')
-  .replace(/^=+\n/gm, '')
-  .trim();
+  const cleanExcerpt = contextText
+    .replace(/--- \[SOURCE DOCUMENT \d+:.*?\n/g, '')
+    .replace(/^=+\n/gm, '')
+    .trim();
 
-// Format a clean, human-readable response
-const mockAnswer = `Here is the relevant information found in the official campus documents:\n\n> ${cleanExcerpt.slice(0, 450).trim()}...\n\n*(💡 **Note:** Add \`GEMINI_API_KEY\` or \`OPENAI_API_KEY\` to your \`.env\` file to enable live AI synthesis and full streaming answers!)*`;
+  const mockAnswer = `Here is the relevant information found in the official campus documents:\n\n> ${cleanExcerpt.slice(0, 450).trim()}...\n\n*(💡 **Note:** Add \`GEMINI_API_KEY\` or \`OPENAI_API_KEY\` to your \`.env\` file to enable live AI synthesis and full streaming answers!)*`;
 
-if (onToken) onToken(mockAnswer);
-
-return {
-  answer: mockAnswer,
-  wasAnswered: true,
-  provider: 'demo-local',
-};
+  if (onToken) onToken(mockAnswer);
 
   return {
     answer: mockAnswer,
