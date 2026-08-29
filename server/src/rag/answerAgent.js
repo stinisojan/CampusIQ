@@ -43,7 +43,7 @@ const generateAnswer = async (question, contextText, hasContext, onToken = null)
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
       
       // Sanitize model string: strip any leading 'models/' prefix
-      const rawModel = config.GEMINI_MODEL || 'gemini-2.0-flash';
+      const rawModel = config.GEMINI_MODEL || 'gemini-2.5-flash-lite';
       const cleanModel = rawModel.replace(/^models\//, '');
 
       const model = genAI.getGenerativeModel({
