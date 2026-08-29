@@ -17,7 +17,7 @@ const config = {
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   
   // LLM Models (Standardized clean string names)
-  GEMINI_MODEL: (process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite').replace(/^models\//, ''),
+  GEMINI_MODEL: (process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite').replace(/^models\//, ''),
   GEMINI_EMBEDDING_MODEL: process.env.GEMINI_EMBEDDING_MODEL || 'models/gemini-embedding-001',
   OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4o-mini',
   OPENAI_EMBEDDING_MODEL: process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
