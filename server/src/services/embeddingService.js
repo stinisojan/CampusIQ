@@ -10,25 +10,23 @@ const generateEmbedding = async (text) => {
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(config.GEMINI_API_KEY);
       
-      // Ensure model name has full resource prefix or falls back safely
-      let rawModel = config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004';
-      const modelName = rawModel.startsWith('models/') ? rawModel : `models/${rawModel}`;
-      
+      // Use clean model name (SDK prepends 'models/' automatically)
+      const modelName = 'gemini-embedding-001';
       const model = genAI.getGenerativeModel({ model: modelName });
+      
       const result = await model.embedContent(cleanText);
-      return result.embedding.values;
+      if (result && result.embedding && result.embedding.values) {
+        return result.embedding.values;
+      }
     } catch (err) {
-      console.warn(`[EmbeddingService] Gemini embedding error with model (${config.GEMINI_EMBEDDING_MODEL || 'text-embedding-004'}): ${err.message}. Using local fallback vector.`);
+      console.warn(`[EmbeddingService] Gemini embedding failed (${err.message}). Using local fallback vector.`);
     }
   }
 
-  // 2. Local Fallback Vector Generator (Prevents server crashes)
+  // 2. Local Fallback Vector Generator
   return generateDeterministicEmbedding(cleanText, 768);
 };
 
-/**
- * Deterministic bag-of-words pseudo-embedding vector
- */
 function generateDeterministicEmbedding(text, dimension = 768) {
   const vector = new Array(dimension).fill(0);
   const words = text.toLowerCase().split(/\W+/).filter(Boolean);
